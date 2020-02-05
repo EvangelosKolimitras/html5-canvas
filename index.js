@@ -6,32 +6,52 @@ const w = {
 canvas.width = w.width
 canvas.height = w.height
 
-const c = canvas.getContext('2d')
-
-let x = Math.floor(Math.random() * w.width)
-let dx = 10
-let y = Math.floor(Math.random() * w.height)
-let dy = 10
-function animate() {
-    requestAnimationFrame(animate)
-    c.clearRect(0, 0, innerWidth, innerHeight)
-    c.beginPath()
-    c.arc(x, y, 100, 0, 2 * Math.PI, false)
-    c.strokeStyle = "red"
-    c.stroke()
-
-    // if (x + radius === w.width) x += -dx
-    // dx += ((x + 30 <= w.width) && (dx)) || -dx
-
-    if (x + 100 > innerWidth || x - 100 < 0)
-        dx = -dx
-    x += dx
-    if (y + 100 > innerHeight || y - 100 < 0)
-        dy = -dy
-    y += dy
-
-    // x = ((x < innerWidth) && x + dx) || x + dx * -1
+class Shape {
+    constructor(x, y, dx, dy, r) {
+        this.c = canvas.getContext('2d')
+        this.x = x;
+        this.y = y
+        this.dx = dx
+        this.dy = dy
+        this.r = r
+    }
 }
 
+class Circle extends Shape {
+    constructor(x, y, dx, dy, r) {
+        super(x, y, dx, dy, r)
+    }
+    draw = () => {
+        this.c.clearRect(0, 0, w.width, w.height)
+        this.c.beginPath()
+        this.c.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+        this.c.stroke()
+    }
+
+    update = () => {
+        if (this.x + this.r > w.width || this.x - this.r < 0)
+            this.dx = this.dx * -1
+        this.x += this.dx
+        if (this.y + this.r > w.height || this.y - this.r < 0)
+            this.dy = -this.dy
+        this.y += this.dy
+
+        this.x += this.dx
+        this.y += this.dy
+
+        this.draw()
+    }
+}
+const circlesArray = []
+const circles = [Math.floor(Math.random() * w.width), Math.floor(Math.random() * w.height), (Math.random() - .5) * 5, (Math.random() - .5) * 5]
+for (let i = 0; i <= 20; i++) {
+    circlesArray.push(new Circle(...circles, 40))
+}
+const animate = () => {
+    requestAnimationFrame(animate)
+    for (let i = 0; i <= circlesArray.length; i++) {
+        circlesArray[i].update()
+    }
+}
 
 animate()
