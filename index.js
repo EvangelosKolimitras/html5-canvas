@@ -5,7 +5,6 @@ const w = {
 }
 canvas.width = w.width
 canvas.height = w.height
-
 class Shape {
     constructor(x, y, dx, dy, r) {
         this.c = canvas.getContext('2d')
@@ -42,14 +41,20 @@ class Circle extends Shape {
         this.draw()
     }
 }
+
 const circlesArray = []
-const circles = [Math.floor(Math.random() * w.width), Math.floor(Math.random() * w.height), (Math.random() - .5) * 5, (Math.random() - .5) * 5]
+
+let x = Math.floor(Math.random() * w.width);
+let dx = (Math.random() - .5) * 5;
+let y = Math.floor(Math.random() * w.height);
+let dy = (Math.random() - .5) * 5;
+let r = 40;
 for (let i = 0; i <= 20; i++) {
-    circlesArray.push(new Circle(...circles, 40))
+    circlesArray.push(new Circle(x, y, dx, dy, r))
 }
 const animate = () => {
     requestAnimationFrame(animate)
-    for (let i = 0; i <= circlesArray.length; i++) {
+    for (let i = 0; i < circlesArray.length; i++) {
         circlesArray[i].update()
     }
 }
