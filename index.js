@@ -5,9 +5,9 @@ const w = {
 }
 canvas.width = w.width
 canvas.height = w.height
+const c = canvas.getContext('2d')
 class Shape {
     constructor(x, y, dx, dy, r) {
-        this.c = canvas.getContext('2d')
         this.x = x;
         this.y = y
         this.dx = dx
@@ -21,10 +21,10 @@ class Circle extends Shape {
         super(x, y, dx, dy, r)
     }
     draw = () => {
-        this.c.clearRect(0, 0, w.width, w.height)
-        this.c.beginPath()
-        this.c.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
-        this.c.stroke()
+
+        c.beginPath()
+        c.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+        c.stroke()
     }
 
     update = () => {
@@ -43,20 +43,22 @@ class Circle extends Shape {
 }
 
 const circlesArray = []
-
-let x = Math.floor(Math.random() * w.width);
-let dx = (Math.random() - .5) * 5;
-let y = Math.floor(Math.random() * w.height);
-let dy = (Math.random() - .5) * 5;
-let r = 40;
-for (let i = 0; i <= 20; i++) {
-    circlesArray.push(new Circle(x, y, dx, dy, r))
+for (let i = 0; i < 20; i++) {
+    const circle = [
+        Math.random() * (w.width - 40 * 2) + 40,
+        Math.random() * (w.height - 40 * 2) + 40,
+        (Math.random() - .5) * 5,
+        (Math.random() - .5) * 5,
+        40
+    ]
+    circlesArray.push(new Circle(...circle))
 }
 const animate = () => {
+    c.clearRect(0, 0, w.width, w.height)
     requestAnimationFrame(animate)
     for (let i = 0; i < circlesArray.length; i++) {
         circlesArray[i].update()
     }
 }
-
+console.log(new Circle(1, 2, 3, 4, 10))
 animate()
