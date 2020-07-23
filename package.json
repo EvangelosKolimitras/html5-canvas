@@ -4,7 +4,7 @@
   "description": "A random moved colored particles with onMouseMove event",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc --watch"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/EvangelosKolimitras/interactive-particles/issues"
   },
-  "homepage": "https://github.com/EvangelosKolimitras/interactive-particles#readme"
+  "homepage": "https://github.com/EvangelosKolimitras/interactive-particles#readme",
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
 }
