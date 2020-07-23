@@ -1,0 +1,23 @@
+{
+  "name": "interactive-particles",
+  "version": "1.0.0",
+  "description": "A random moved colored particles with onMouseMove event",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvangelosKolimitras/interactive-particles.git"
+  },
+  "keywords": [
+    "canvas",
+    "animation"
+  ],
+  "author": "Evangelos Kolimitras",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvangelosKolimitras/interactive-particles/issues"
+  },
+  "homepage": "https://github.com/EvangelosKolimitras/interactive-particles#readme"
+}

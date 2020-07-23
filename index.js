@@ -105,6 +105,7 @@ const init = () => {
 const animate = () => {
     c.clearRect(0, 0, w.width, w.height)
     requestAnimationFrame(animate)
+
     for (let i = 0; i < circlesArray.length; i++) {
         circlesArray[i].update()
     }
